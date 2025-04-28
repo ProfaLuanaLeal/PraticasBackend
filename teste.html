@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot Simples</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        #chatbox {
+            width: 300px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background: white;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        #messages {
+            height: 400px;
+            padding: 10px;
+            overflow-y: auto;
+            border-bottom: 1px solid #ccc;
+        }
+        #userInput {
+            display: flex;
+            padding: 10px;
+        }
+        #userInput input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        #userInput button {
+            padding: 10px;
+            margin-left: 5px;
+            border: none;
+            background: #5cb85c;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        #userInput button:hover {
+            background: #4cae4c;
+        }
+    </style>
+</head>
+<body>
+    <div id="chatbox">
+        <div id="messages"></div>
+        <div id="userInput">
+            <input type="text" id="userMessage" placeholder="Digite sua mensagem...">
+            <button onclick="sendMessage()">Enviar</button>
+        </div>
+    </div>
+
+    <script>
+        function sendMessage() {
+            const input = document.getElementById('userMessage');
+            const messages = document.getElementById('messages');
+            const userText = input.value;
+
+            if (userText) {
+                messages.innerHTML += `<div><strong>Você:</strong> ${userText}</div>`;
+                input.value = '';
+
+                // Simulação de resposta do bot
+                setTimeout(() => {
+                    messages.innerHTML += `<div><strong>Bot:</strong> Eu recebi sua mensagem!</div>`;
+                    messages.scrollTop = messages.scrollHeight; // rolar para baixo
+                }, 1000);
+            }
+        }
+    </script>
+</body>
+</html>
