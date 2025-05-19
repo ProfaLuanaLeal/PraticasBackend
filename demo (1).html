@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login e Cadastro</title>
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js";
+        import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyBB011le4krq3lUosziQOAzj4X195xuMvk",
+            authDomain: "backend-768b5.firebaseapp.com",
+            projectId: "backend-768b5",
+            storageBucket: "backend-768b5.firebasestorage.app",
+            messagingSenderId: "1014539624383",
+            appId: "1:1014539624383:web:1bcd0ac00c676a33624b0a",
+            measurementId: "G-Y5SF2PJ1XQ"
+        };
+
+        // Inicializar Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        // Cadastro
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('signup-form').addEventListener('submit', (e) => {
+                e.preventDefault();
+                const email = document.getElementById('signup-email').value;
+                const password = document.getElementById('signup-password').value;
+
+                createUserWithEmailAndPassword(auth, email, password)
+                    .then((userCredential) => {
+                        alert('Cadastro realizado com sucesso!');
+                    })
+                    .catch((error) => {
+                        alert(error.message);
+                    });
+            });
+
+            // Login
+            document.getElementById('login-form').addEventListener('submit', (e) => {
+                e.preventDefault();
+                const email = document.getElementById('login-email').value;
+                const password = document.getElementById('login-password').value;
+
+                signInWithEmailAndPassword(auth, email, password)
+                    .then((userCredential) => {
+                        alert('Login realizado com sucesso!');
+                    })
+                    .catch((error) => {
+                        alert(error.message);
+                    });
+            });
+        });
+    </script>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        form { margin: 20px; }
+        input { display: block; margin-bottom: 10px; }
+    </style>
+</head>
+<body>
+
+<h2>Cadastro</h2>
+<form id="signup-form">
+    <input type="email" id="signup-email" placeholder="Email" required>
+    <input type="password" id="signup-password" placeholder="Senha" required>
+    <button type="submit">Cadastrar</button>
+</form>
+
+<h2>Login</h2>
+<form id="login-form">
+    <input type="email" id="login-email" placeholder="Email" required>
+    <input type="password" id="login-password" placeholder="Senha" required>
+    <button type="submit">Entrar</button>
+</form>
+
+</body>
+</html>
